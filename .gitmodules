@@ -1,0 +1,3 @@
+[submodule "lib/OCaml-Lib"]
+	path = lib/OCaml-Lib
+	url = git@github.com:DBarthe/OCaml-Lib.git
