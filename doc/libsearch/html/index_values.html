@@ -1,0 +1,82 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Search" rel="Chapter" href="Search.html"><title>Index of values</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Index of values</h1>
+<table>
+<tr><td align="left"><br>A</td></tr>
+<tr><td><a href="Search.html#VALa_star_strategy">a_star_strategy</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">a_star_strategy heuristic_fun</code> returns a strategy which pairs up the cost
+    and the heuristic to choose which nodes to expands.
+</div>
+</td></tr>
+<tr><td align="left"><br>B</td></tr>
+<tr><td><a href="Search.html#VALbreadth_first_strategy">breadth_first_strategy</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">breadth_first_strategy ()</code> returns a strategy which expands nodes in 
+    a homogeneous fashion compared to their depth.
+</div>
+</td></tr>
+<tr><td align="left"><br>C</td></tr>
+<tr><td><a href="Search.html#VALcreate_node">create_node</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">create_node state cost</code> creates a <code class="code">node</code> with <code class="code">state</code> and <code class="code">cost</code>.
+</div>
+</td></tr>
+<tr><td><a href="Search.html#VALcreate_problem">create_problem</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">create_problem ~initial_state ~is_goal ~expand</code> creates a <code class="code">problem</code> with
+    given data : <code class="code">initial_state</code> is where the search should start., <code class="code">is_goal state</code> is a function that takes a <code class="code">state</code> and returns true
+        if this state is a goal. , <code class="code">expand node</code> is a function that expands a <code class="code">node</code> by returning a list
+        of all reachable nodes from it.
+</div>
+</td></tr>
+<tr><td align="left"><br>D</td></tr>
+<tr><td><a href="Search.html#VALdepth_first_strategy">depth_first_strategy</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">depth_first strategy ()</code> returns a strategy which expands nodes
+    in depth as priority.
+</div>
+</td></tr>
+<tr><td align="left"><br>N</td></tr>
+<tr><td><a href="Search.html#VALnode_cost">node_cost</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">node_cost node</code> returns the cost of <code class="code">node</code>.
+</div>
+</td></tr>
+<tr><td><a href="Search.html#VALnode_depth">node_depth</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">node_depth node</code> returns the depth of <code class="code">node</code>.
+</div>
+</td></tr>
+<tr><td><a href="Search.html#VALnode_state">node_state</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">node_state node</code> returns the state of <code class="code">node</code>.
+</div>
+</td></tr>
+<tr><td align="left"><br>T</td></tr>
+<tr><td><a href="Search.html#VALtree_search">tree_search</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">tree_search strategy problem</code> is the main function for tree search.
+</div>
+</td></tr>
+<tr><td align="left"><br>U</td></tr>
+<tr><td><a href="Search.html#VALuniform_strategy">uniform_strategy</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">uniform_strategy ()</code> returns a strategy wihch expands nodes with the
+    lower cost first.
+</div>
+</td></tr>
+</table>
+</body>
+</html>

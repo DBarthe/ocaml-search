@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Search" rel="Chapter" href="Search.html"><link title="Types " rel="Section" href="#2_Types">
+<link title="User interface for data manipulation " rel="Section" href="#2_Userinterfacefordatamanipulation">
+<link title="Generics Searches " rel="Section" href="#2_GenericsSearches">
+<link title="Strategies " rel="Section" href="#2_Strategies">
+<title>Search</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Search.html">Search</a></h1>
+
+<pre><span class="keyword">module</span> Search: <code class="code">sig</code> <a href="Search.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Functional and generic search algorithms.<br>
+<b>Author(s):</b> Barthelemy Delemotte<br>
+</div>
+<hr width="100%">
+<br>
+<h2 id="2_Types">Types </h2><br>
+<br>
+The next types have all a type parameter <code class="code">'a</code> which is user defined
+    and stands for a state.<br>
+
+<pre><span id="TYPEnode"><span class="keyword">type</span> <code class="type">'a</code> node</span> </pre>
+<div class="info ">
+<code class="code">node</code> is the type used during searches for trees and graphs.
+    It contains the state, the cost and the depth of a node.<br>
+</div>
+
+
+<pre><span id="TYPEproblem"><span class="keyword">type</span> <code class="type">'a</code> problem</span> </pre>
+<div class="info ">
+<code class="code">problem</code> is a collection of problem-specific data. It is used
+    to specialize the search algorithms which are generics.<br>
+</div>
+
+
+<pre><span id="TYPEstrategy"><span class="keyword">type</span> <code class="type">('a, 'b)</code> strategy</span> </pre>
+<div class="info ">
+<code class="code">strategy</code> is a collection of data which define the behavior of the search.
+    That means: in which order the nodes are expanded.<br>
+</div>
+
+
+<pre><code><span id="TYPEresult"><span class="keyword">type</span> <code class="type">'a</code> result</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTresult.Failure"><span class="constructor">Failure</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTresult.Solution"><span class="constructor">Solution</span></span> <span class="keyword">of</span> <code class="type">'a <a href="Search.html#TYPEnode">node</a></code></code></td>
+
+</tr></table>
+
+<div class="info ">
+<code class="code">result</code> is the type of the value returned by the search functions.<br>
+</div>
+
+<br>
+<h2 id="2_Userinterfacefordatamanipulation">User interface for data manipulation </h2><br>
+
+<pre><span id="VALcreate_problem"><span class="keyword">val</span> create_problem</span> : <code class="type">initial_state:'a -><br>       is_goal:('a -> bool) -><br>       expand:('a <a href="Search.html#TYPEnode">node</a> -> 'a <a href="Search.html#TYPEnode">node</a> list) -> 'a <a href="Search.html#TYPEproblem">problem</a></code></pre><div class="info ">
+<code class="code">create_problem ~initial_state ~is_goal ~expand</code> creates a <code class="code">problem</code> with
+    given data :<ul>
+<li><code class="code">initial_state</code> is where the search should start.</li>
+<li><code class="code">is_goal state</code> is a function that takes a <code class="code">state</code> and returns true
+        if this state is a goal. </li>
+<li><code class="code">expand node</code> is a function that expands a <code class="code">node</code> by returning a list
+        of all reachable nodes from it.</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="VALcreate_node"><span class="keyword">val</span> create_node</span> : <code class="type">'a -> int -> 'a <a href="Search.html#TYPEnode">node</a></code></pre><div class="info ">
+<code class="code">create_node state cost</code> creates a <code class="code">node</code> with <code class="code">state</code> and <code class="code">cost</code>. The depth
+    has not to be defined by the user.<br>
+</div>
+
+<pre><span id="VALnode_state"><span class="keyword">val</span> node_state</span> : <code class="type">'a <a href="Search.html#TYPEnode">node</a> -> 'a</code></pre><div class="info ">
+<code class="code">node_state node</code> returns the state of <code class="code">node</code>.<br>
+</div>
+
+<pre><span id="VALnode_cost"><span class="keyword">val</span> node_cost</span> : <code class="type">'a <a href="Search.html#TYPEnode">node</a> -> int</code></pre><div class="info ">
+<code class="code">node_cost node</code> returns the cost of <code class="code">node</code>.<br>
+</div>
+
+<pre><span id="VALnode_depth"><span class="keyword">val</span> node_depth</span> : <code class="type">'a <a href="Search.html#TYPEnode">node</a> -> int</code></pre><div class="info ">
+<code class="code">node_depth node</code> returns the depth of <code class="code">node</code>.<br>
+</div>
+<br>
+<h2 id="2_GenericsSearches">Generics Searches </h2><br>
+
+<pre><span id="VALtree_search"><span class="keyword">val</span> tree_search</span> : <code class="type">('a, 'b) <a href="Search.html#TYPEstrategy">strategy</a> -> 'a <a href="Search.html#TYPEproblem">problem</a> -> 'a <a href="Search.html#TYPEresult">result</a></code></pre><div class="info ">
+<code class="code">tree_search strategy problem</code> is the main function for tree search.
+    It is a generic function that has to be specialized in some ways.
+    It takes a <code class="code">strategy</code> to define the kind of exploration (A* for example);
+    and a <code class="code">problem</code> which makes the search problem-specific.<br>
+</div>
+<br>
+<h2 id="2_Strategies">Strategies </h2><br>
+
+<pre><span id="VALdepth_first_strategy"><span class="keyword">val</span> depth_first_strategy</span> : <code class="type">unit -> ('a, 'a <a href="Search.html#TYPEnode">node</a>) <a href="Search.html#TYPEstrategy">strategy</a></code></pre><div class="info ">
+<code class="code">depth_first strategy ()</code> returns a strategy which expands nodes
+    in depth as priority. It digs until finding a solution or a leaf, then
+    it terminates or backtracks.<br>
+</div>
+
+<pre><span id="VALbreadth_first_strategy"><span class="keyword">val</span> breadth_first_strategy</span> : <code class="type">unit -> ('a, 'a <a href="Search.html#TYPEnode">node</a>) <a href="Search.html#TYPEstrategy">strategy</a></code></pre><div class="info ">
+<code class="code">breadth_first_strategy ()</code> returns a strategy which expands nodes in 
+    a homogeneous fashion compared to their depth. If a solution is found, 
+    it is one of the shallowest.<br>
+</div>
+
+<pre><span id="VALuniform_strategy"><span class="keyword">val</span> uniform_strategy</span> : <code class="type">unit -> ('a, 'a <a href="Search.html#TYPEnode">node</a>) <a href="Search.html#TYPEstrategy">strategy</a></code></pre><div class="info ">
+<code class="code">uniform_strategy ()</code> returns a strategy wihch expands nodes with the
+    lower cost first. The solution, if there is, is assured to be an optimal.
+    However, the number of nodes expanded is large.<br>
+</div>
+
+<pre><span id="VALa_star_strategy"><span class="keyword">val</span> a_star_strategy</span> : <code class="type">('a -> int) -> ('a, int * 'a <a href="Search.html#TYPEnode">node</a>) <a href="Search.html#TYPEstrategy">strategy</a></code></pre><div class="info ">
+<code class="code">a_star_strategy heuristic_fun</code> returns a strategy which pairs up the cost
+    and the heuristic to choose which nodes to expands.
+    Note: the heuristic value is an estimation of the real cost from a state
+    until the goal.
+    The result depends on the <code class="code">heuristic_fun</code>. If the heuristic is "admissible",
+    that means it doesn't overevaluate the real cost, the solution will be
+    optimal in tree searches. If the heuritic is "consistent", that means it is
+    admissible and coherent between all states, the solution will be optimal in
+    graph searches.<br>
+</div>
+</body></html>
