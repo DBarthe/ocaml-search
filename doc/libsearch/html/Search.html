@@ -27,12 +27,12 @@ Functional and generic search algorithms.<br>
 <br>
 <h2 id="2_Types">Types </h2><br>
 <br>
-The next types have all a type parameter <code class="code">'a</code> which is user defined
-    and stands for a state.<br>
+All the next types have a parameter <code class="code">'a</code> which is defined by user
+    and represents a state.<br>
 
 <pre><span id="TYPEnode"><span class="keyword">type</span> <code class="type">'a</code> node</span> </pre>
 <div class="info ">
-<code class="code">node</code> is the type used during searches for trees and graphs.
+<code class="code">node</code> is the type used to compose trees and graphs.
     It contains the state, the cost and the depth of a node.<br>
 </div>
 
@@ -46,7 +46,7 @@ The next types have all a type parameter <code class="code">'a</code> which is u
 
 <pre><span id="TYPEstrategy"><span class="keyword">type</span> <code class="type">('a, 'b)</code> strategy</span> </pre>
 <div class="info ">
-<code class="code">strategy</code> is a collection of data which define the behavior of the search.
+<code class="code">strategy</code> is a collection of data which defines the behavior of the search.
     That means: in which order the nodes are expanded.<br>
 </div>
 
@@ -81,7 +81,7 @@ The next types have all a type parameter <code class="code">'a</code> which is u
 <li><code class="code">is_goal state</code> is a function that takes a <code class="code">state</code> and returns true
         if this state is a goal. </li>
 <li><code class="code">expand node</code> is a function that expands a <code class="code">node</code> by returning a list
-        of all reachable nodes from it.</li>
+        of all reachable nodes from it. This function has to and set the cost of the nodes.</li>
 </ul>
 <br>
 </div>
@@ -110,6 +110,15 @@ The next types have all a type parameter <code class="code">'a</code> which is u
     It is a generic function that has to be specialized in some ways.
     It takes a <code class="code">strategy</code> to define the kind of exploration (A* for example);
     and a <code class="code">problem</code> which makes the search problem-specific.<br>
+</div>
+
+<pre><span id="VALgraph_search"><span class="keyword">val</span> graph_search</span> : <code class="type">('a, 'b) <a href="Search.html#TYPEstrategy">strategy</a> -><br>       'a <a href="Search.html#TYPEproblem">problem</a> -> ('a -> 'a -> bool) -> 'a <a href="Search.html#TYPEresult">result</a></code></pre><div class="info ">
+<code class="code">graph_search strategy problem state_equal</code> is the main function for
+    graph search. It is used like <code class="code">tree_search</code> except that it takes an
+    additional parameter <code class="code">state_equal</code> which is the equal operator for the
+    state type <code class="code">'a</code>.
+    The difference with <code class="code">tree_search</code> is that it will not expand two times
+    the same state.<br>
 </div>
 <br>
 <h2 id="2_Strategies">Strategies </h2><br>

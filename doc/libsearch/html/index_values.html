@@ -38,7 +38,7 @@
 <code class="code">create_problem ~initial_state ~is_goal ~expand</code> creates a <code class="code">problem</code> with
     given data : <code class="code">initial_state</code> is where the search should start., <code class="code">is_goal state</code> is a function that takes a <code class="code">state</code> and returns true
         if this state is a goal. , <code class="code">expand node</code> is a function that expands a <code class="code">node</code> by returning a list
-        of all reachable nodes from it.
+        of all reachable nodes from it. This function has to and set the cost of the nodes.
 </div>
 </td></tr>
 <tr><td align="left"><br>D</td></tr>
@@ -46,6 +46,13 @@
 <td><div class="info">
 <code class="code">depth_first strategy ()</code> returns a strategy which expands nodes
     in depth as priority.
+</div>
+</td></tr>
+<tr><td align="left"><br>G</td></tr>
+<tr><td><a href="Search.html#VALgraph_search">graph_search</a> [<a href="Search.html">Search</a>]</td>
+<td><div class="info">
+<code class="code">graph_search strategy problem state_equal</code> is the main function for
+    graph search.
 </div>
 </td></tr>
 <tr><td align="left"><br>N</td></tr>
