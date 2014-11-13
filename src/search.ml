@@ -68,6 +68,36 @@ let tree_search strategy problem =
   let frange = strategy.push strategy.initial_frange first_node in
   frange_loop frange
 
+(* the main algorithm for graph search *)
+let graph_search strategy problem state_equal =
+
+  let rec child_nodes_loop depth frange closed_set = function
+  | [] -> frange_loop frange closed_set
+  | node::nodes ->
+    let node = { node with depth } in
+    let frange = strategy.push frange node in
+    child_nodes_loop depth frange closed_set nodes
+
+  and frange_loop frange closed_set =
+    if PriorityQueue.is_empty frange then
+      Failure
+    else
+      let (frange, node) = strategy.pop frange in
+      if problem.is_goal node.state then
+        Solution node
+      else if List.exists (state_equal (node_state node)) closed_set then
+        frange_loop frange closed_set
+      else
+        let closed_set = (node_state node) :: closed_set
+        and child_nodes = problem.expand node
+        and child_depth = (node_depth node) + 1 in
+        child_nodes_loop child_depth frange closed_set child_nodes in
+
+  let first_node = _create_node problem.initial_state 0 ~depth:0 in
+  let frange = strategy.push strategy.initial_frange first_node in
+  frange_loop frange []
+
+
 (* strategy template, with common push and pop *)
 let create_common_strategy compare_fun =
   let initial_frange = PriorityQueue.create compare_fun

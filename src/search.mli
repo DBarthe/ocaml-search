@@ -6,10 +6,10 @@
 
 (** {2 Types } *)
 
-(** The next types have all a type parameter ['a] which is user defined
-    and stands for a state. *)
+(** All the next types have a parameter ['a] which is defined by user
+    and represents a state. *)
 
-(** [node] is the type used during searches for trees and graphs.
+(** [node] is the type used to compose trees and graphs.
     It contains the state, the cost and the depth of a node. *)
 type 'a node
 
@@ -17,7 +17,7 @@ type 'a node
     to specialize the search algorithms which are generics. *)
 type 'a problem
 
-(** [strategy] is a collection of data which define the behavior of the search.
+(** [strategy] is a collection of data which defines the behavior of the search.
     That means: in which order the nodes are expanded. *)
 type ('a, 'b) strategy 
 
@@ -32,7 +32,7 @@ type 'a result = Failure | Solution of 'a node
       - [is_goal state] is a function that takes a [state] and returns true
         if this state is a goal. 
       - [expand node] is a function that expands a [node] by returning a list
-        of all reachable nodes from it. *)
+        of all reachable nodes from it. This function has to and set the cost of the nodes. *)
 val create_problem : initial_state:'a
   -> is_goal:('a -> bool)
   -> expand:('a node -> 'a node list)
@@ -59,6 +59,14 @@ val node_depth : 'a node -> int
     It takes a [strategy] to define the kind of exploration (A* for example);
     and a [problem] which makes the search problem-specific. *)
 val tree_search : ('a, 'b) strategy -> 'a problem -> 'a result
+
+(** [graph_search strategy problem state_equal] is the main function for
+    graph search. It is used like [tree_search] except that it takes an
+    additional parameter [state_equal] which is the equal operator for the
+    state type ['a].
+    The difference with [tree_search] is that it will not expand two times
+    the same state. *)
+val graph_search : ('a, 'b) strategy -> 'a problem -> ('a -> 'a -> bool) -> 'a result
 
 (** {2 Strategies } *)
 
