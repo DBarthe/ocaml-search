@@ -5,10 +5,10 @@ SOURCES = src/search.mli src/search.ml
   
 CREATE_LIB = yes
 
-INCDIRS = lib/OCaml-Lib/
+INCDIRS = lib/OCaml-Lib/src
 LIBDIRS = lib/OCaml-Lib/
 
-LIBS = libmy
+LIBS = lib/OCaml-Lib/libmy
 
 OCAMLDOCFLAGS = -charset utf-8
 
@@ -20,10 +20,12 @@ tests: all
 	make clean -C test/
 
 libmy:
-	make -C lib/OCaml-Lib/
+	make -C lib/OCaml-Lib/ INCDIRS= LIBS=
 
-realclean: clean
-	make clean -C lib/OCaml-Lib/
+clean-libmy:
+	make clean -C lib/OCaml-Lib/ INCDIRS= LIBS=
+
+realclean: clean clean-libmy
 
 include $(OCAMLMAKEFILE)
 
