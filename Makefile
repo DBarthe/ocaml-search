@@ -12,7 +12,7 @@ LIBS = lib/OCaml-Lib/libmy
 
 OCAMLDOCFLAGS = -charset utf-8
 
-all: libmy bcl
+all: libmy bcl ncl
 
 tests: all
 	make -C test/
