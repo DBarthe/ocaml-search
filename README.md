@@ -27,7 +27,7 @@ $ make
 ### Usage
 The full documenation is in ***doc/libsearch/html/***
 
-##### 1 - Define problem specific type and value.
+##### 1 - Define problem specific type and values.
 ```ocaml
 (* the type which represents the states *)
 type state = ...
@@ -47,11 +47,11 @@ let problem = Search.create_problem initial_state is_goal expand
 
 ```
 
-##### 2 - Choose a strategy
+##### 2 - Choose a strategy.
 ```ocaml
 let strategy = Search.depth_first_strategy ()
 
-(* You can also choose breadth-first, uniform, or A *)
+(* You can also choose breadth-first, uniform, or A* *)
 ```
 
 ##### 3 - Let's search !
@@ -60,7 +60,7 @@ let result = Search.tree_search strategy problem in
 
 match result with
 | Search.Failure       -> ... (* no solution *)
-| Search.Solution node -> ... (* one solution in node *)
+| Search.Solution node -> ... (* one solution contained in node *)
 
 (*  There is two kind of search : tree and graph.
     In tree search, the same node can be expanded several times, from
